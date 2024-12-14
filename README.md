@@ -1,4 +1,4 @@
-# Task Manager Application
+# To-do List App
 
 A simple task management application that allows users to create, organize, and manage lists and tasks efficiently.
 
