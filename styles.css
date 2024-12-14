@@ -1,0 +1,275 @@
+:root {
+    /* Define custom CSS variables for colors */
+    --clr-primary: rgb(54, 112, 199); /* Primary color for backgrounds */
+    --clr-light: #f4f4f4; /* Light color for text and backgrounds */
+    --clr-dark: #333; /* Dark color for text */
+    --clr-warning: rgb(99, 36, 36); /* Warning color for buttons and alerts */
+}
+
+*,
+*::before,
+*::after {
+    /* Set global font and box-sizing */
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+body {
+    /* Body styling and layout grid definition */
+    margin: 0;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    background-color: var(--clr-primary); /* Use primary color for background */
+    color: var(--clr-light); /* Light text color */
+    display: grid;
+    grid: "header header header header" auto
+          "...... lists  active ......" auto / 1fr minmax(100px, 300px) minmax(250px, 500px) 1fr;
+}
+
+.title {
+    /* Styling for the main title */
+    grid-area: header; /* Positioning within the grid */
+    text-align: center;
+    font-size: calc(7vw + 2rem); /* Responsive font size */
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.1); /* Light translucent color */
+    letter-spacing: 2px;
+    margin: -.3em 0 .5em;
+}
+
+.all-tasks {
+    /* Container for the task lists */
+    grid-area: lists;
+}
+
+.task-list {
+    /* Styling for individual task lists */
+    font-size: 1.2rem;
+    line-height: 1.7; /* Increase line spacing */
+    list-style: circle;
+    padding-left: 1.1em;
+}
+
+.list-name {
+    /* Hoverable task list name */
+    cursor: pointer;
+}
+
+.list-name:hover {
+    opacity: 0.7; /* Slightly dim on hover */
+}
+
+form {
+    /* Styling for forms */
+    display: flex; /* Layout with flexible elements */
+}
+
+.btn {
+    /* Base styling for all buttons */
+    cursor: pointer;
+    background: 0;
+    border: 0;
+    padding: 0;
+    color: inherit; /* Inherit color from parent */
+}
+
+.btn.create {
+    /* Styling for the create button */
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-right: 0.25rem;
+    transition: opacity 250ms ease-in; /* Smooth opacity change */
+}
+
+.btn.create:hover {
+    opacity: 0.7; /* Dim button on hover */
+}
+
+.btn.delete {
+    /* Styling for the delete button */
+    opacity: 0.7;
+    font-size: 1rem;
+    transition: color 200ms; /* Smooth color change */
+}
+
+.btn.delete:hover {
+    color: var(--clr-warning); /* Change to warning color on hover */
+}
+
+.new {
+    /* Styling for new input fields */
+    background: transparent;
+    border: 0;
+    color: inherit;
+    border-bottom: 1px solid currentColor;
+    font-size: inherit;
+    outline: none;
+    padding: 0.25em;
+    transition: border-bottom 150ms ease-in; /* Smooth border animation */
+    order: 2;
+}
+
+.new::placeholder {
+    /* Styling for input placeholder text */
+    opacity: 0.3;
+    color: white;
+}
+
+.new:focus {
+    /* Highlight input field when focused */
+    border-bottom-width: 3px;
+}
+
+.new:focus::placeholder {
+    opacity: 0.15; /* Dim placeholder on focus */
+}
+
+.new.list {
+    /* Specific styling for new list input */
+    font-size: 1.2rem;
+}
+
+.new.task {
+    /* Specific styling for new task input */
+    margin: 0;
+}
+
+.active-list {
+    /* Styling for the active list */
+    font-weight: 700; /* Bold for emphasis */
+}
+
+.todo-list {
+    /* Main styling for the todo list container */
+    --spacer: 2rem; /* Define spacing variable */
+    grid-area: active;
+    background: var(--clr-light); /* Light background */
+    color: var(--clr-dark); /* Dark text */
+}
+
+.todo-header {
+    /* Styling for the header of the todo list */
+    padding: var(--spacer);
+    background: #e4e4e4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.list-title {
+    /* Title of the list */
+    margin: 0 1em 0 0;
+}
+
+.task-count {
+    /* Display task count */
+    margin: 0;
+    font-size: 1rem;
+}
+
+.todo-body {
+    /* Body container for tasks */
+    padding: var(--spacer);
+    position: relative;
+}
+
+.new-task-creator .create {
+    /* Specific styling for task creation button */
+    color: var(--clr-primary);
+}
+
+[type="checkbox"] {
+    /* Hide default checkbox appearance */
+    opacity: 0;
+    position: absolute;
+}
+
+.task label {
+    /* Styling for task labels */
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.task {
+    /* Styling for task items */
+    position: relative;
+    margin-bottom: 1.25em;
+}
+
+.task::after {
+    /* Separator line between tasks */
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -0.5em;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.1;
+}
+
+.custom-checkbox {
+    /* Custom checkbox styling */
+    --size: .75em;
+    display: inline-block;
+    width: var(--size);
+    height: var(--size);
+    margin-right: var(--size);
+    cursor: pointer;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: transform 200ms ease-in-out;
+}
+
+.task:hover .custom-checkbox,
+[type="checkbox"]:focus + label .custom-checkbox {
+    /* Enlarge checkbox on hover or focus */
+    transform: scale(1.2);
+    color: var(--clr-primary);
+}
+
+[type="checkbox"]:checked + label .custom-checkbox {
+    /* Checked state styling for checkbox */
+    background: var(--clr-primary);
+    border-color: var(--clr-primary);
+    box-shadow: inset 0 0 0px 2px white;
+}
+
+[type="checkbox"]:checked + label {
+    /* Dim task label when checked */
+    opacity: 0.5;
+}
+
+.task label::after {
+    /* Line-through effect for completed tasks */
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 1.5em;
+    top: calc(50% - 1.5px);
+    height: 3px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 150ms ease-in-out;
+}
+
+[type="checkbox"]:checked + label::after {
+    /* Expand line-through when checked */
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.delete-stuff {
+    /* Styling for delete controls */
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -35px;
+    color: var(--clr-light);
+}
